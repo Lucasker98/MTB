@@ -33,7 +33,7 @@ button:active{transform:scale(.98)}button:disabled{opacity:.55}
 </div>
 <script>
 const intro=document.getElementById('intro'),p1=document.getElementById('page1'),p2=document.getElementById('page2'),openBtn=document.getElementById('openBtn'),status=document.getElementById('status');
-async function loadPic(id,prefix){const parts=await Promise.all([0,1,2].map(i=>fetch('payload/'+prefix+'-0'+i+'.txt').then(r=>{if(!r.ok)throw Error();return r.text()})));document.getElementById(id).src='data:image/jpeg;base64,'+parts.join('').replace(/\s/g,'')}
+async function loadPic(id,prefix){const parts=await Promise.all([0,1,2].map(i=>fetch('https://raw.githubusercontent.com/Lucasker98/MTB/e40997cf56795c4b3a0931289b0a8364fcec561e/payload/'+prefix+'-0'+i+'.txt').then(r=>{if(!r.ok)throw Error();return r.text()})));document.getElementById(id).src='data:image/jpeg;base64,'+parts.join('').replace(/\s/g,'')}
 Promise.all([loadPic('greeting','g'),loadPic('surprise','s')]).then(()=>{openBtn.disabled=false;openBtn.textContent='לפתוח את ההפתעה ✨'}).catch(()=>{status.textContent='לא הצלחתי לטעון. נסי לרענן ❤️';openBtn.textContent='לרענן';openBtn.disabled=false;openBtn.onclick=()=>location.reload()});
 openBtn.addEventListener('click',()=>{if(document.getElementById('greeting').src)intro.classList.add('hidden')});
 document.getElementById('nextBtn').addEventListener('click',()=>{p1.classList.remove('active');p1.classList.add('exit');setTimeout(()=>{p1.classList.remove('exit');p2.classList.add('active')},260)});
